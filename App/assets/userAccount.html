@@ -1,0 +1,25 @@
+{% load static %}
+ 
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+	<link href="{% static 'style.css'%}" rel="stylesheet">	
+
+</head>
+<body>
+	<div class="main1 container-fluid">
+		<div class="row">
+			<div class="col-sm-12"> 
+				<nav class="navbar navbar-light padding">
+			  		<span class="navbar-brand mb-1"><h1><a href="index.html"><font color="white">Navbar</font></a></h1></span>
+			  		<span class="navbar-brand mb-1"><img src="img/img_avatar.png" alt="Avatar" class="avatar">&nbsp<font color="white">{{username}} &nbsp <a href="logout.html" class="" role="">Log Out</font></a></span>
+				</nav>
+			</div>
+		</div>
+<div style="text-decoration:none; overflow:hidden;max-width:100%;width:100%;height:400px;"><div id="mymap-display" style="height:100%; width:100%;max-width:100%;"><iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q={{ loc.latitude }},{{loc.longitude }}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe></div><a class="embeddedmap-code" href="https://www.embed-map.com" id="injectmap-data">https://www.embed-map.com</a><style>#mymap-display img{max-height:none;max-width:none!important;background:none!important;}</style></div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</body>
+</html>

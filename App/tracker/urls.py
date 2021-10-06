@@ -18,11 +18,13 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework.authtoken.views import obtain_auth_token
 
 
 urlpatterns = [
     path('',views.home,name='home'),
     path('login',views.login,name='login'),
+    path('token',obtain_auth_token,name='token'),
     path('signup',views.signup,name='signup'),
     path('createAccount',views.createAccount,name='createAccount'),
     path('adminpage',views.adminpage,name='adminpage'),

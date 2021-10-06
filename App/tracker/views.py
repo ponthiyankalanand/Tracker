@@ -6,6 +6,8 @@ from django.contrib.auth.models import User, auth
 from .serializers import locationSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+#for token return sighnup
+#from rest_framework.authtoken.models import Token
  
 
 def home(request):
@@ -55,6 +57,11 @@ def createAccount(request):
 				Account = userAdminDetails(uname=uname,upass=upass,umail=umail,userID=userID,status=status)
 				Account.save()
 				AccountDetails.save()
+				#for token return sighnup
+				#token= Token.object.get(user=account).key
+				#data['token']   token
+				#return Rsponse(data)
+				#===================
 				#AccountDetails = userAdminDetails(uname=uname,upass=upass,umail=umail,userID=userID,status=status)
 				#AccountDetails.save()
 				res = not AccountDetails

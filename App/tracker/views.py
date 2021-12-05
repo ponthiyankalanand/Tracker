@@ -7,6 +7,8 @@ from .serializers import locationSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from django.http import JsonResponse
+from rest_framework.authtoken.models import Token
 import datetime
 import hashlib
 #for token return sighnup
@@ -106,5 +108,28 @@ def lockhecker(request):
 	if serializer.is_valid():
 		serializer.save()
 	return Response(serializer.data)
+@api_view(['POST'])
+def fetchtoken(request):
+	response={}
+	try:
+		data=request.data
+		username=data['username']
+		password=data['password']
+		print (username,password)
+		obj = auth.authenticate(username=username, password=password)
+		res = not obj
+		if res != True:
+		#return render(request, 'userAccount.html',{'loc':obj2,'username':username,'userid':userID})
+			token = Token.objects.get(user_id=obj.id)
+			response={'status':'S1177','token':token.key}
+		else:
+			#print( 'User name or Password wrong ')
+			response={'status':'f1177','token':'NULL'}
+
+	except:
+		#print ('nope')
+		response={'status':'e1177','token':'NULL'}
+
+	return JsonResponse(response)
 
 

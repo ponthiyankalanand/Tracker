@@ -28,7 +28,7 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path('',views.home,name='home'),
     path('login',views.login,name='login'),
-    path('token',obtain_auth_token,name='token'),
+    path('token',views.fetchtoken,name='token'),
     path('signup',views.signup,name='signup'),
     path('createAccount',views.createAccount,name='createAccount'),
     path('adminpage',views.adminpage,name='adminpage'),

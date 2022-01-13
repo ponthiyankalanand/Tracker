@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
 from rest_framework.authtoken.models import Token
+from django.db.models import Max
 import datetime
 import hashlib
 #for token return sighnup
@@ -37,7 +38,9 @@ def adminpage(request):
 		#print(userobj)
 		userID=userobj.userID
 		#print (userID)
-		obj2 = locationDetails.objects.get(userID=userID)
+		count=locationDetails.objects.filter(userID=userID).aggregate(countvalue=Max('id'))
+		print(count.get('countvalue'))
+		obj2=locationDetails.objects.get(id=count.get('countvalue'))
 		#print (obj2)
 		print (obj2.latitude,obj2.longitude,username)
 		return render(request, 'userAccount.html',{'loc':obj2,'username':username,'userid':userID})
@@ -108,6 +111,7 @@ def lockhecker(request):
 	if serializer.is_valid():
 		serializer.save()
 	return Response(serializer.data)
+	
 @api_view(['POST'])
 def fetchtoken(request):
 	response={}

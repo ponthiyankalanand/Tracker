@@ -6,6 +6,7 @@
 	<title></title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 	<link href="{% static 'style.css'%}" rel="stylesheet">	
+	<link rel="stylesheet" href="{% static 'libs/v6.9.0-dist/ol.css'%}" type="text/css">
 
 </head>
 <body>
@@ -13,13 +14,78 @@
 		<div class="row">
 			<div class="col-sm-12"> 
 				<nav class="navbar navbar-light padding">
-			  		<span class="navbar-brand mb-1"><h1><a href="index.html"><font color="white">Navbar</font></a></h1></span>
-			  		<span class="navbar-brand mb-1"><img src="img/img_avatar.png" alt="Avatar" class="avatar">&nbsp<font color="white">{{username}} &nbsp {{userid}} &nbsp <a href="logout.html" class="" role="">Log Out</font></a></span>
+			  		<span class="navbar-brand mb-1"><h1><a href="index.html">
+			  			<font color="white">Navbar</font></a></h1>
+			  		</span>
+			  		<span class="navbar-brand mb-1"><img src="img/img_avatar.png" alt="Avatar" class="avatar">&nbsp
+			  			<font color="white">{{username}} &nbsp {{userid}} &nbsp <a href="logout.html" class="" role="">Log Out</font></a>
+			  		</span>
 				</nav>
 			</div>
 		</div>
-<div style="text-decoration:none; overflow:hidden;max-width:100%;width:100%;height:400px;"><div id="mymap-display" style="height:100%; width:100%;max-width:100%;"><iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q={{ loc.latitude }},{{loc.longitude }}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe></div><a class="embeddedmap-code" href="https://www.embed-map.com" id="injectmap-data">https://www.embed-map.com</a><style>#mymap-display img{max-height:none;max-width:none!important;background:none!important;}</style></div>
+		<div class="row">
+			<div id="js-map" class="map"></div>
+		</div>
+		<div class="row">
+      <b><u>Location Details</u></b>
+			longitude:{{loc.longitude}}<br/>latitude:{{loc.latitude}}
+		</div>
 	</div>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<script src="{% static 'libs/v6.9.0-dist/ol.js'%}"></script>
+<script type="text/javascript">
+window.onload = init;
+function init() {
+  const latitude= parseFloat("{{loc.latitude}}");
+  const longitude= parseFloat("{{loc.longitude}}");
+  const location= [longitude,latitude]
+  const map = new ol.Map({
+    view: new ol.View({
+      center: ol.proj.fromLonLat(location),
+      zoom:10,
+    }),
+    layers:[
+    new ol.layer.Tile({
+      source: new ol.source.OSM()
+    })
+    
+    ],
+    target: 'js-map'
+  })
+var Styledot = new ol.style.Style({
+  image: new ol.style.Circle({
+    radius:6,
+    fill: new ol.style.Fill({
+      color:'#ff2e05'
+    })
+  })
+})
+
+var Stylepicker = new ol.style.Style({
+  image: new ol.style.Icon({
+    anchor:[0.5,10],
+    anchorXUnits: 'fraction',
+    anchorYUnits: 'pixels',
+    src:'img/picker.png',
+  })
+})
+
+ var marker = new ol.Feature({
+  geometry: new ol.geom.Point(ol.proj.fromLonLat(location)),
+  type:'current location',
+  name:'test'
+ });
+
+  const positionLayer = new ol.layer.VectorImage({
+   title:'POI',
+   source: new ol.source.Vector({
+    features:[marker]
+   }),
+   style: Styledot
+  });
+  map.addLayer(positionLayer);
+}
+
+</script>
+
 </body>
 </html>

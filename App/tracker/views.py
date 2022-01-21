@@ -110,7 +110,12 @@ def lockhecker(request):
 	serializer = locationSerializer(data=request.data)
 	if serializer.is_valid():
 		serializer.save()
-	return Response(serializer.data)
+		print("location updated")
+		status={'status':'001'}
+	else:
+		print("Error while update location")
+		status={'status':'000'}
+	return Response(status)
 	
 @api_view(['POST'])
 def fetchtoken(request):
@@ -124,11 +129,13 @@ def fetchtoken(request):
 		res = not obj
 		if res != True:
 		#return render(request, 'userAccount.html',{'loc':obj2,'username':username,'userid':userID})
+			userobj = userAdminDetails.objects.get(uname=username)
+			userID=userobj.userID
 			token = Token.objects.get(user_id=obj.id)
-			response={'status':'S1177','token':token.key}
+			response={'status':'001','token':token.key,'userID':userID}
 		else:
 			#print( 'User name or Password wrong ')
-			response={'status':'f1177','token':'NULL'}
+			response={'status':'000','token':'NULL'}
 
 	except:
 		#print ('nope')

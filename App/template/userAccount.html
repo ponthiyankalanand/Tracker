@@ -10,27 +10,62 @@
 
 </head>
 <body>
-	<div class="main1 container-fluid">
+	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-12"> 
+			<div class="col-sm-12 main1"> 
 				<nav class="navbar navbar-light padding">
 			  		<span class="navbar-brand mb-1"><h1><a href="index.html">
 			  			<font color="white">Navbar</font></a></h1>
 			  		</span>
 			  		<span class="navbar-brand mb-1"><img src="img/img_avatar.png" alt="Avatar" class="avatar">&nbsp
-			  			<font color="white">{{username}} &nbsp {{userid}} &nbsp <a href="logout.html" class="" role="">Log Out</font></a>
+			  			<font color="white">{{username}} &nbsp Service id: {{userid}} &nbsp <a href="logout.html" class="" role="">Log Out</font></a>
 			  		</span>
-				</nav>
-			</div>
+				</nav>	
+		    <div class="row ">
+			   <div id="js-map" class="map"></div>
+		    </div>
+      </div>
+    </div>
+      <br><br>
+		<div class="row" style="background-color:black; margin-left: 20px;">
+        <div class="col-sm-3" >
+          <font color="white">
+          <b><u>Location Details</u></b>
+    			<br/>longitude: {{loc.longitude}}<br/>latitude: {{loc.latitude}}
+          </font>
+        </div>
+        <div class="col-sm-9" style="background-color:white;">
+        </div>
 		</div>
-		<div class="row">
-			<div id="js-map" class="map"></div>
-		</div>
-		<div class="row">
-      <b><u>Location Details</u></b>
-			longitude:{{loc.longitude}}<br/>latitude:{{loc.latitude}}
-		</div>
-	</div>
+     <br><br>
+  <div class="row" style="background-color:black;">
+    <div class="col-sm-3" >
+      <font color="white"><br>
+      <h5><u>Contact</u></h5>
+        <p>trackme@gmai.com</p></font>
+        <button class="btn btn-warning">Report an issue</button>
+    </div>
+    <div class="col-sm-3" >
+      <font color="white"><br>
+      <h5><u>About Us</u></h5>
+        <p>We are trackme. Our aim is to create an eye for our loved onces. the main objective is to track people and their activities for their safty and protection. </font>
+    </div>
+    <div class="col-sm-3" >
+    <font color="white"><br>
+      <h5><u>Follow Us on</u></h5>
+        <p>Facebook</p>
+        <p>instagram</p>
+        <p>Twitter</p>
+    </font>
+    </div>
+    <div class="col-sm-3" >
+      <font color="white"><br>
+      <h5><u>Disigned and developed by</u></h5>
+      <p>Click the login and create an account. After account creation you will get a key ( Dont share the key ). You can monitor the device from your admin panel.</p>
+      </font>
+    </div>
+  </div>
+</div>
 <script src="{% static 'libs/v6.9.0-dist/ol.js'%}"></script>
 <script type="text/javascript">
 window.onload = init;
